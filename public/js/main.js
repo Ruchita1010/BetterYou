@@ -14,6 +14,11 @@ socket.on("message", room => {
 
 socket.emit("joinRoom", { username, room });
 
+// Get room users
+socket.on("roomusers", (users) => {
+    outputUsers(users);
+});
+
 const ctx = document.getElementById('progressChart');
 let myChart = new Chart(ctx, {
     type: 'horizontalBar',
@@ -25,7 +30,7 @@ let myChart = new Chart(ctx, {
         }]
     },
     options: {
-      }
+    }
 });
 
 taskSubmission.addEventListener("submit", (e) => {
@@ -33,13 +38,12 @@ taskSubmission.addEventListener("submit", (e) => {
     socket.emit("taskDone", socket.id, e.target.elements.submitTask.value);
 });
 
-socket.on("updateChart", (roomUsers, taskText) => {
-    console.log(roomUsers);
+socket.on("updateChart", (roomUsers) => {
     const xAxes = roomUsers.map(x => x.username);
     const yAxes = roomUsers.map(y => y.days);
     const barColors = roomUsers.map(z => z.color);
 
-    if(myChart){
+    if (myChart) {
         myChart.destroy();
     }
     myChart = new Chart(ctx, {
@@ -52,10 +56,10 @@ socket.on("updateChart", (roomUsers, taskText) => {
             }]
         },
         options: {
-            legend: {display: false},
+            legend: { display: false },
             title: {
-              display: true,
-              text: "Current Progress"
+                display: true,
+                text: "Current Progress"
             },
             scales: {
                 xAxes: [{
@@ -65,9 +69,14 @@ socket.on("updateChart", (roomUsers, taskText) => {
                     }
                 }]
             }
-          }
+        }
     });
 });
+
+const usersList = document.querySelector("#ul-list");
+const outputUsers = (users) => {
+    usersList.innerHTML = `${users.map(user => `<li class="list-group-item mb-3">${user.username}</li>`).join("")}`;
+}
 
 
 
