@@ -1,0 +1,15 @@
+{
+  "name": "betteryou",
+  "version": "1.0.0",
+  "description": "Starhacks hackathon project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "author": "Ruchita",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.2",
+    "socket.io": "^4.4.1"
+  }
+}

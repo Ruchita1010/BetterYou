@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    color: whitesmoke;
+    margin-bottom: 2.5rem;
+}
+
+body{
+    background-color: #83498c;
+}
+
+.container{
+    padding: 1.5rem;
+}
+
+#canvas-wrapper{
+    width: 50%;
+    height: 50vh;
+    background-color: wheat;
+}
+
+#progressChart{
+    width: 100%; 
+    height: 100% !important;
+    background-color: white;
+    padding: 1rem;
+}
